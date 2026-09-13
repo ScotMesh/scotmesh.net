@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+  <!-- Flag of Scotland (the Saltire / St Andrew's Cross). Blue = Pantone 300. -->
+  <rect width="60" height="60" fill="#005EB8"/>
+  <path d="M0,0 L60,60 M60,0 L0,60" stroke="#ffffff" stroke-width="12"/>
+</svg>
