@@ -62,8 +62,9 @@ pre code{background:none;padding:0;white-space:pre}
 .net{--net:var(--mc);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1.5rem;margin-top:1.25rem}
 .net.mt{--net:var(--mt)}
 .net.rns{--net:var(--rns)}
-.net .eyebrow{display:flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.35rem}
-.net .eyebrow::before{content:"";width:.6rem;height:.6rem;border-radius:50%;background:var(--net);box-shadow:0 0 0 3px color-mix(in srgb,var(--net) 22%,transparent);flex:none}
+.net .eyebrow{font-family:var(--mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.7rem}
+.net-title img{display:block;height:58px;width:auto}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .net .lead{margin-top:.3rem}
 .tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem;margin-top:1.2rem}
 .tool{background:var(--well);border:1px solid var(--line);border-radius:4px;padding:1rem 1.1rem;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:.3rem;transition:border-color .2s}
@@ -112,7 +113,7 @@ a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
 <!-- ===================== MESHCORE ===================== -->
 <div class="net" id="meshcore">
   <div class="eyebrow">LoRa mesh</div>
-  <h2>MeshCore</h2>
+  <h2 class="net-title"><img src="/lockup-meshcore.svg" alt="scotmesh/meshcore" width="208" height="58"><span class="vh">MeshCore</span></h2>
   <p class="lead small">Long-range LoRa messaging on cheap radios. These tools show what the Scottish MeshCore mesh is doing, fed by observer radios around the country.</p>
   <div class="tools">
     <a class="tool" href="https://corescope.scotmesh.net"><strong>CoreScope</strong><span class="q">What is on the mesh right now?</span><span class="d">Nodes, packets and paths as observers see them, updated live.</span></a>
@@ -137,7 +138,7 @@ set mqtt1.audience scotmesh-mqtt.mm7roq.compute.oarc.uk</code></pre>
 <!-- ===================== MESHTASTIC ===================== -->
 <div class="net mt" id="meshtastic">
   <div class="eyebrow">LoRa mesh</div>
-  <h2>Meshtastic</h2>
+  <h2 class="net-title"><img src="/lockup-meshtastic.svg" alt="scotmesh/meshtastic" width="208" height="58"><span class="vh">Meshtastic</span></h2>
   <p class="lead small">The other LoRa mesh, and where a lot of us started. ScotMesh people run Meshtastic nodes across the country; these are the places to see and learn about it.</p>
   <div class="tools">
     <a class="tool" href="https://meshflow.pskillen.xyz/login"><strong>MeshFlow</strong><span class="q">What is the Meshtastic mesh doing?</span><span class="d">Meshtastic monitor run by a ScotMesh member — nodes and traffic as seen from Scotland. Needs a login.</span></a>
@@ -149,7 +150,7 @@ set mqtt1.audience scotmesh-mqtt.mm7roq.compute.oarc.uk</code></pre>
 <!-- ===================== RETICULUM ===================== -->
 <div class="net rns" id="reticulum">
   <div class="eyebrow">Encrypted network, any bearer</div>
-  <h2>Reticulum</h2>
+  <h2 class="net-title"><img src="/lockup-reticulum.svg" alt="scotmesh/reticulum" width="208" height="58"><span class="vh">Reticulum</span></h2>
   <p class="lead small">An encrypted network with no accounts and no central authority, carried over LoRa, I2P or plain internet. We run a public transport node anyone can connect to, and the tools to get a radio on it.</p>
   <div class="tools">
     <a class="tool" href="https://rns.scotmesh.net"><strong>Backbone node</strong><span class="q">How do I connect?</span><span class="d">TCP <code>rns.scotmesh.net:4242</code> or I2P. Addresses for the chat hub, propagation node and Nomad Network pages.</span>
