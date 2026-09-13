@@ -30,7 +30,7 @@
   color-scheme:dark;
 }
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.55;padding-inline:16px;padding-block:0 3rem}
-.wrap{max-width:1100px;margin:0 auto;padding-top:1.5rem}
+.wrap{max-width:1320px;margin:0 auto;padding-top:1.25rem}
 a{color:var(--link)}
 h1,h2,h3{margin:0;line-height:1.2;text-wrap:balance;font-family:var(--mono);font-weight:600}
 h1{font-size:clamp(1.9rem,4.6vw,2.6rem);letter-spacing:-.02em}
@@ -43,13 +43,15 @@ pre{background:var(--well);border:1px solid var(--line);border-radius:4px;paddin
 pre code{background:none;padding:0;white-space:pre}
 
 /* header: the one bold moment, mesh art with the saltire on the right */
-.hero{position:relative;padding:2.25rem 2rem 2rem;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--bg) url("/header-mesh.svg") right center/auto 100% no-repeat}
+.hero{position:relative;padding:1.1rem 1.6rem 1.2rem;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--bg) url("/header-mesh.svg") right center/auto 100% no-repeat}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 38%,rgba(10,20,36,.55) 62%,rgba(10,20,36,0) 85%);pointer-events:none}
 .hero > *{position:relative}
 .header{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
-.header .mark{width:64px;height:64px;flex:none;border-radius:3px}
-.subtitle{color:var(--muted);margin:.5rem 0 0;font-size:1.15rem;max-width:60ch}
-.mainsite{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.25rem;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:.4rem .9rem;color:var(--ink);text-decoration:none;font-family:var(--mono);font-weight:600;font-size:.95rem}
+.header .mark{width:56px;height:56px;flex:none;border-radius:3px}
+.subtitle{color:var(--muted);margin:.35rem 0 0;font-size:1.05rem;max-width:none}
+.hero-row{display:flex;flex-direction:column;align-items:flex-start;max-width:calc(100% - 300px)}
+@media (max-width:900px){.hero-row{max-width:none}}
+.mainsite{display:inline-flex;align-items:center;gap:.5rem;margin-top:.7rem;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:.4rem .9rem;color:var(--ink);text-decoration:none;font-family:var(--mono);font-weight:600;font-size:.95rem}
 .mainsite:hover{border-color:var(--link)}
 .mainsite span{color:var(--muted);font-family:var(--sans);font-weight:400;font-size:1rem}
 @media (max-width:700px){
@@ -58,21 +60,23 @@ pre code{background:none;padding:0;white-space:pre}
   .status{flex-wrap:wrap;border-radius:8px}
 }
 
-/* network sections: each network keeps its own node colour for wayfinding */
-.net{--net:var(--mc);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1.5rem;margin-top:1.25rem}
+/* networks: three equal columns, none above the others; each keeps its own colour for wayfinding */
+.nets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1rem;align-items:stretch}
+@media (max-width:1000px){.nets{grid-template-columns:minmax(0,1fr)}}
+.net{--net:var(--mc);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.1rem 1.2rem;display:flex;flex-direction:column;min-width:0}
 .net.mt{--net:var(--mt)}
 .net.rns{--net:var(--rns)}
-.net .eyebrow{font-family:var(--mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.7rem}
-.net-title img{display:block;height:58px;width:auto}
+.net .eyebrow{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.55rem}
+.net-title img{display:block;height:48px;width:auto}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.net .lead{margin-top:.3rem}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem;margin-top:1.2rem}
-.tool{background:var(--well);border:1px solid var(--line);border-radius:4px;padding:1rem 1.1rem;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:.3rem;transition:border-color .2s}
+.net .lead{margin:.45rem 0 0;font-size:.9rem;line-height:1.42}
+.tools{display:flex;flex-direction:column;gap:.45rem;margin-top:.75rem}
+.tool{background:var(--well);border:1px solid var(--line);border-radius:4px;padding:.5rem .75rem;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:.1rem;transition:border-color .2s}
 .tool:hover{border-color:var(--net)}
-.tool strong{font-family:var(--mono);font-weight:600;font-size:1.02rem}
-.tool .q{color:var(--net);font-weight:600}
-.tool .d{color:var(--muted);font-size:.95rem}
-.tool .foot{margin-top:auto;padding-top:.5rem}
+.tool strong{font-family:var(--mono);font-weight:600;font-size:.95rem}
+.tool .q{color:var(--net);font-weight:600;font-size:.95rem;line-height:1.35}
+.tool .d{color:var(--muted);font-size:.85rem;line-height:1.36}
+.tool .foot{padding-top:.35rem}
 
 .status{display:inline-flex;align-items:center;gap:.5rem;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.2rem .7rem .2rem .45rem;font-weight:600;font-size:.9rem;color:var(--ink)}
 .status .when{color:var(--muted);font-weight:400;font-size:.84rem}
@@ -81,17 +85,25 @@ pre code{background:none;padding:0;white-space:pre}
 .dot.down{background:var(--down);box-shadow:0 0 0 3px rgba(239,68,68,.25)}
 .dot.stale{background:var(--warn);box-shadow:0 0 0 3px rgba(245,158,11,.25)}
 
-.sub{margin-top:1.8rem;padding-top:1.2rem;border-top:1px solid var(--line)}
-.sub h3{margin-bottom:.2rem}
-.banner{background:var(--saltire);border-radius:4px;padding:1rem 1.25rem;margin-top:1rem}
-.banner .k{font-family:var(--mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;opacity:.85}
-.banner .v{font-family:var(--mono);font-weight:600;word-break:break-all}
+/* MeshCore observer set-up folds away inside its column so the columns stay equal */
+.sub{margin-top:.9rem;border:1px solid var(--line);border-radius:4px;background:var(--well)}
+.sub summary{cursor:pointer;padding:.6rem .8rem;font-family:var(--mono);font-weight:600;font-size:.9rem;color:var(--ink);list-style:none;display:flex;justify-content:space-between;gap:.5rem}
+.sub summary::-webkit-details-marker{display:none}
+.sub summary::after{content:"+";color:var(--net)}
+.sub[open] summary::after{content:"−"}
+.sub summary:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.sub .inner{padding:0 .8rem .8rem}
+.sub .inner p{font-size:.88rem;line-height:1.45}
+.banner{background:var(--saltire);border-radius:4px;padding:.7rem .9rem;margin-top:.7rem}
+.banner .k{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.85}
+.banner .v{font-family:var(--mono);font-weight:600;font-size:.88rem;word-break:break-all}
+.sub pre{font-size:.76rem;padding:.7rem}
 
-.elsewhere{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.elsewhere{margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
 .elsewhere .lbl{color:var(--muted);font-family:var(--mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-right:.3rem}
 .elsewhere a{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:.3rem .85rem;color:var(--ink);text-decoration:none;font-size:.95rem}
 .elsewhere a:hover{border-color:var(--link)}
-footer{margin-top:2.5rem;color:var(--muted);text-align:center;font-size:.95rem}
+footer{margin-top:1.75rem;color:var(--muted);text-align:center;font-size:.95rem}
 a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -106,14 +118,18 @@ a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
       <h1>ScotMesh Tools &amp; Services</h1>
     </div>
   </div>
-  <p class="subtitle">The live tools and infrastructure behind ScotMesh, for the three networks ScotMesh people run — <strong>MeshCore</strong>, <strong>Meshtastic</strong> and <strong>Reticulum</strong>.</p>
-  <a class="mainsite" href="https://scotmesh.uk">scotmesh.uk <span>— the main site: community, forum, getting started</span></a>
+  <div class="hero-row">
+    <p class="subtitle">The live tools and infrastructure behind ScotMesh, for the three networks ScotMesh people run — <strong>MeshCore</strong>, <strong>Meshtastic</strong> and <strong>Reticulum</strong>.</p>
+    <a class="mainsite" href="https://scotmesh.uk">scotmesh.uk <span>— the main site: community, forum, getting started</span></a>
+  </div>
 </header>
 
+<main class="nets">
+
 <!-- ===================== MESHCORE ===================== -->
-<div class="net" id="meshcore">
+<section class="net" id="meshcore">
   <div class="eyebrow">LoRa mesh</div>
-  <h2 class="net-title"><img src="/lockup-meshcore.svg" alt="scotmesh/meshcore" width="208" height="58"><span class="vh">MeshCore</span></h2>
+  <h2 class="net-title"><img src="/lockup-meshcore.svg" alt="scotmesh/meshcore" width="172" height="48"><span class="vh">MeshCore</span></h2>
   <p class="lead small">Long-range LoRa messaging on cheap radios. These tools show what the Scottish MeshCore mesh is doing, fed by observer radios around the country.</p>
   <div class="tools">
     <a class="tool" href="https://corescope.scotmesh.net"><strong>CoreScope</strong><span class="q">What is on the mesh right now?</span><span class="d">Nodes, packets and paths as observers see them, updated live.</span></a>
@@ -123,8 +139,9 @@ a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
     <a class="tool" href="https://wiki.scotmesh.uk/en/MeshCore/MeshCore"><strong>MeshCore wiki</strong><span class="q">How do I set up and join?</span><span class="d">Getting started, channels, regions, repeater setup and the FAQ, on the community wiki at scotmesh.uk.</span></a>
   </div>
 
-  <div class="sub" id="observer">
-    <h3>Feeding the tools: running a MeshCore observer</h3>
+  <details class="sub" id="observer">
+    <summary>Run a MeshCore observer</summary>
+    <div class="inner">
     <p class="small">Observers are MeshCore radios that report what they hear to the tools above. If you run one on the MQTT Observer Firmware, point it at ScotMesh with these commands. The hostname is deliberately the long-standing one — every existing observer uses it, and it will keep working.</p>
     <div class="banner"><div class="k">MQTT endpoint</div><div class="v">scotmesh-mqtt.mm7roq.compute.oarc.uk</div></div>
 <pre><code>set mqtt1.preset custom
@@ -132,25 +149,26 @@ set mqtt1.server scotmesh-mqtt.mm7roq.compute.oarc.uk
 set mqtt1.port 443
 set mqtt1.audience scotmesh-mqtt.mm7roq.compute.oarc.uk</code></pre>
     <p class="small">Observer firmware: <a href="https://static.loraproject.ie/mqtt/">static.loraproject.ie/mqtt</a>. These settings connect your observer to the ScotMesh MQTT infrastructure using MeshCore authentication.</p>
-  </div>
-</div>
+    </div>
+  </details>
+</section>
 
 <!-- ===================== MESHTASTIC ===================== -->
-<div class="net mt" id="meshtastic">
+<section class="net mt" id="meshtastic">
   <div class="eyebrow">LoRa mesh</div>
-  <h2 class="net-title"><img src="/lockup-meshtastic.svg" alt="scotmesh/meshtastic" width="208" height="58"><span class="vh">Meshtastic</span></h2>
+  <h2 class="net-title"><img src="/lockup-meshtastic.svg" alt="scotmesh/meshtastic" width="172" height="48"><span class="vh">Meshtastic</span></h2>
   <p class="lead small">The other LoRa mesh, and where a lot of us started. ScotMesh people run Meshtastic nodes across the country; these are the places to see and learn about it.</p>
   <div class="tools">
     <a class="tool" href="https://meshflow.pskillen.xyz/login"><strong>MeshFlow</strong><span class="q">What is the Meshtastic mesh doing?</span><span class="d">Meshtastic monitor run by a ScotMesh member — nodes and traffic as seen from Scotland. Needs a login.</span></a>
     <a class="tool" href="https://wiki.scotmesh.uk/en/Meshtastic/Meshtastic"><strong>Meshtastic wiki</strong><span class="q">How do I set up and join?</span><span class="d">The Meshtastic section of the community wiki on scotmesh.uk.</span></a>
     <a class="tool" href="https://scotmesh.uk"><strong>Forum</strong><span class="q">Who else is doing this?</span><span class="d">Build guides, antenna primers and solar node threads on the main site.</span></a>
   </div>
-</div>
+</section>
 
 <!-- ===================== RETICULUM ===================== -->
-<div class="net rns" id="reticulum">
+<section class="net rns" id="reticulum">
   <div class="eyebrow">Encrypted network, any bearer</div>
-  <h2 class="net-title"><img src="/lockup-reticulum.svg" alt="scotmesh/reticulum" width="208" height="58"><span class="vh">Reticulum</span></h2>
+  <h2 class="net-title"><img src="/lockup-reticulum.svg" alt="scotmesh/reticulum" width="172" height="48"><span class="vh">Reticulum</span></h2>
   <p class="lead small">An encrypted network with no accounts and no central authority, carried over LoRa, I2P or plain internet. We run a public transport node anyone can connect to, and the tools to get a radio on it.</p>
   <div class="tools">
     <a class="tool" href="https://rns.scotmesh.net"><strong>Backbone node</strong><span class="q">How do I connect?</span><span class="d">TCP <code>rns.scotmesh.net:4242</code> or I2P. Addresses for the chat hub, propagation node and Nomad Network pages.</span>
@@ -158,7 +176,9 @@ set mqtt1.audience scotmesh-mqtt.mm7roq.compute.oarc.uk</code></pre>
     <a class="tool" href="https://rnode.scotmesh.net"><strong>ScotMesh Flasher</strong><span class="q">How do I get a radio or node on it?</span><span class="d">Step-by-step in your browser: flash an RNode radio, or build a standalone microReticulum node, provision it and set the ScotMesh profile. Firmware is fetched for you.</span></a>
     <a class="tool" href="https://wiki.scotmesh.net"><strong>Reticulum wiki</strong><span class="q">How does any of this work?</span><span class="d">Nought to connected, running your own node, the radio settings, and the bugs that have cost us time.</span></a>
   </div>
-</div>
+</section>
+
+</main>
 
 <div class="elsewhere">
   <span class="lbl">Elsewhere</span>
