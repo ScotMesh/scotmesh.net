@@ -215,16 +215,17 @@ HEAD = '''<title>ScotMesh</title>
 NETS = [
     dict(id='meshcore', name='MeshCore', tint='var(--meshcore)', href='https://meshcore.scotmesh.net/',
          who='Held Up by Repeaters',
-         blurb='Long-range LoRa messaging on cheap radios. The mesh reaches from the top of '
+         blurb='Long-range LoRa messaging on cheap radios, with an app on your phone and '
+               'repeaters on the hills doing the carrying. The mesh reaches from the top of '
                'Scotland down through the Isles and across to the south of the Republic of '
-               'Ireland, and it has the most tooling behind it: a live map, coverage built from '
-               'real packets, and alerts when a repeater goes quiet.',
+               'Ireland, with a live map, coverage built from real packets, and alerts when a '
+               'repeater goes quiet.',
          vitals=[('repeaters', '109', 'repeaters'), ('packets', '741', 'packets today'), ('observers', '13', 'observers')]),
     dict(id='meshtastic', name='Meshtastic', tint='var(--meshtastic)', href='https://meshtastic.scotmesh.net/',
          who="Scotland's Original Mesh",
-         blurb='Long-range LoRa messaging with an app on your phone. Scotland only, and the '
-               'easiest of the three to get the hang of — the widest hardware support, the most '
-               'documentation, and the largest node count here.',
+         blurb='Long-range LoRa messaging on cheap radios, with an app on your phone and '
+               'the community\'s longest-running mesh behind it. Scotland only, with a wide '
+               'choice of hardware, plenty of documentation, and hundreds of nodes already on air.',
          vitals=[('nodes', '293', 'nodes heard'), ('routers', '17', 'routers'), ('packets', '63', 'packets today')]),
     dict(id='reticulum', name='Reticulum', tint='var(--reticulum)', href='https://rns.scotmesh.net/',
          who='No Radio Needed',
