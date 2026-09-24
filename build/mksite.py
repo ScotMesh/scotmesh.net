@@ -5,6 +5,7 @@ site also self-hosts IBM Plex under /fonts rather than pulling it from Google,
 which is how the previous page already worked.
 """
 import pathlib, re
+import seo
 
 page = pathlib.Path('page.html').read_text()
 
@@ -21,25 +22,12 @@ page = re.sub(r'<link rel="stylesheet" href="https://fonts\.googleapis\.com[^"]*
 assert 'fonts.googleapis.com' not in page, 'a Google Fonts reference survived'
 assert '@font-face' in page
 
-page = page.replace('<title>ScotMesh</title>',
-                    '<title>ScotMesh — community mesh networks in Scotland</title>', 1)
+page = re.sub(r'<title>.*?</title>\s*', '', page, count=1)  # seo.head() supplies the title
 
-HEAD_EXTRA = '''<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="canonical" href="https://scotmesh.net/">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="description" content="ScotMesh: the community mesh networks of Scotland. MeshCore, Meshtastic and Reticulum — what each one is, where the nodes are, and how to join.">
-<meta name="theme-color" content="#0A1424">
-<meta name="color-scheme" content="dark light">
-<meta property="og:title" content="ScotMesh">
-<meta property="og:description" content="The community mesh networks of Scotland: MeshCore, Meshtastic and Reticulum. What each one is, where the nodes are, and how to join.">
-<meta property="og:image" content="https://scotmesh.net/og.png">
-<meta property="og:url" content="https://scotmesh.net/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="/fonts/ibm-plex-mono-600.woff2" as="font" type="font/woff2" crossorigin>
+PRELOADS = '''<link rel="preload" href="/fonts/ibm-plex-mono-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-condensed-400.woff2" as="font" type="font/woff2" crossorigin>
 '''
+HEAD_EXTRA = seo.head('parent', extra=PRELOADS)
 
 RESET = '''<style>
   :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
@@ -58,5 +46,7 @@ out = pathlib.Path('..')
 out.mkdir(exist_ok=True)
 (out / 'index.html').write_text(doc)
 (out / 'app.js').write_text(pathlib.Path('site-app.js').read_text())
+(out / 'robots.txt').write_text(seo.robots('parent'))
+(out / 'sitemap.xml').write_text(seo.sitemap('parent'))
 print('index.html %.0f KB, app.js %.1f KB' %
       (len(doc) / 1024, len((out / 'app.js').read_text()) / 1024))
