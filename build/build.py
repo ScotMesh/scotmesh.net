@@ -59,7 +59,7 @@ HEAD = '''<title>ScotMesh</title>
   code { font-family: var(--mono); font-size: .92em; }
 
   .nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
-    background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px);
+    background: var(--bg); background: color-mix(in srgb, var(--bg) 92%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line); }
   .nav .wrap { display: flex; align-items: center; gap: 12px; min-height: 60px; flex-wrap: wrap; }
   .lockup { display: block; margin-right: auto; }
@@ -206,6 +206,11 @@ HEAD = '''<title>ScotMesh</title>
   a:focus-visible, button:focus-visible { outline: 2px solid var(--chrome-ink); outline-offset: 2px; }
 
   @media (max-width: 880px) {
+    /* one column: headline, then the map, then the cards */
+    .hero-grid { grid-template-columns: 1fr; gap: 26px; padding-block: 34px 20px; }
+    h1 { max-width: none; }
+    .scotmap { max-height: 440px; }
+    .nav .wrap { padding-block: 10px; row-gap: 4px; }
     .nets { grid-template-columns: 1fr; }
     .foot-grid { grid-template-columns: 1fr 1fr; }
   }
@@ -215,17 +220,16 @@ HEAD = '''<title>ScotMesh</title>
 NETS = [
     dict(id='meshcore', name='MeshCore', tint='var(--meshcore)', href='https://meshcore.scotmesh.net/',
          who='Held Up by Repeaters',
-         blurb='Long-range LoRa messaging on cheap radios, with an app on your phone and '
-               'repeaters on the hills doing the carrying. The mesh reaches from the top of '
+         blurb='Long-range LoRa messaging on cheap radios. The mesh reaches from the top of '
                'Scotland down through the Isles and across to the south of the Republic of '
-               'Ireland, with a live map, coverage built from real packets, and alerts when a '
-               'repeater goes quiet.',
+               'Ireland, and it has the most tooling behind it: a live map, coverage built from '
+               'real packets, and alerts when a repeater goes quiet.',
          vitals=[('repeaters', '109', 'repeaters'), ('packets', '741', 'packets today'), ('observers', '13', 'observers')]),
     dict(id='meshtastic', name='Meshtastic', tint='var(--meshtastic)', href='https://meshtastic.scotmesh.net/',
          who="Scotland's Original Mesh",
-         blurb='Long-range LoRa messaging on cheap radios, with an app on your phone and '
-               'the community\'s longest-running mesh behind it. Scotland only, with a wide '
-               'choice of hardware, plenty of documentation, and hundreds of nodes already on air.',
+         blurb='Long-range LoRa messaging with an app on your phone. Scotland only, and the '
+               'easiest of the three to get the hang of — the widest hardware support, the most '
+               'documentation, and the largest node count here.',
          vitals=[('nodes', '293', 'nodes heard'), ('routers', '17', 'routers'), ('packets', '63', 'packets today')]),
     dict(id='reticulum', name='Reticulum', tint='var(--reticulum)', href='https://rns.scotmesh.net/',
          who='No Radio Needed',
@@ -334,7 +338,7 @@ def scotmap():
     inset = pathlib.Path('inset.txt').read_text()
     X0, Y0, W, H = -8, -8, 536, 679
     band = H / 5 * 0.62
-    o = ['<svg class="scotmap" viewBox="%d %d %d %d" role="img" aria-label="Map of Scotland with every MeshCore and Meshtastic node heard, in each network\'s colour, and the Reticulum gateway at Cadham">' % (X0, Y0, W, H)]
+    o = ['<svg xmlns:xlink="http://www.w3.org/1999/xlink" class="scotmap" viewBox="%d %d %d %d" role="img" aria-label="Map of Scotland with every MeshCore and Meshtastic node heard, in each network\'s colour, and the Reticulum gateway at Cadham">' % (X0, Y0, W, H)]
     # the saltire on the land, quiet, as on the sibling sites
     o.append('<defs><clipPath id="scot-clip"><path d="%s"/></clipPath></defs>' % land)
     o.append('<g clip-path="url(#scot-clip)"><rect x="%d" y="%d" width="%d" height="%d" fill="#122140"/>'
@@ -393,7 +397,7 @@ def diagram_meshcore():
     o.append('<defs><path id="mc-route" d="%s"/></defs>' % path)
     o.append('<path d="%s" fill="none" stroke="var(--meshcore)" stroke-opacity=".25" stroke-width="1.2" stroke-dasharray="3 4"/>' % path)
     o.append('<g class="anim">')
-    o.append('<circle r="5" fill="var(--meshcore)"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#mc-route"/></animateMotion></circle>')
+    o.append('<circle r="5" fill="var(--meshcore)"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#mc-route" xlink:href="#mc-route"/></animateMotion></circle>')
     # each repeater flashes as the packet reaches it (times from the path's segment lengths)
     for (x, y), t in zip(masts, (1.15, 2.35, 3.55)):
         o.append('<circle cx="%d" cy="%d" r="5" fill="none" stroke="var(--meshcore)" stroke-width="2" opacity="0">'
@@ -506,7 +510,7 @@ def diagram_reticulum():
     o.append('<g class="anim">')
     for rid, dur, begin in (('rns-r1', 7.0, 0.0), ('rns-r2', 6.2, 3.1)):
         for r, extra in ((8, ' fill="none" stroke="var(--reticulum)" stroke-width="1.6"'), (3.2, ' fill="var(--reticulum)"')):
-            o.append('<circle r="%s"%s><animateMotion dur="%.1fs" begin="%.1fs" repeatCount="indefinite"><mpath href="#%s"/></animateMotion></circle>' % (r, extra, dur, begin, rid))
+            o.append('<circle r="%s"%s><animateMotion dur="%.1fs" begin="%.1fs" repeatCount="indefinite"><mpath href="#%s" xlink:href="#%s"/></animateMotion></circle>' % (r, extra, dur, begin, rid, rid))
     o.append('</g></svg>')
     return ''.join(o)
 
