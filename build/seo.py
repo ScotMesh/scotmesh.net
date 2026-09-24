@@ -17,7 +17,7 @@ SITES = {
      og_desc='MeshCore, Meshtastic and Reticulum across Scotland: what each one is, where the nodes are, and how to join.',
      image='https://scotmesh.net/og.png', image_alt='ScotMesh: three meshes across Scotland, one community', theme='#0A1424',
      keywords='mesh network Scotland, MeshCore Scotland, Meshtastic Scotland, Reticulum Scotland, LoRa mesh Scotland, ScotMesh',
-     about=['MeshCore', 'Meshtastic', 'Reticulum'], icons='<link rel="icon" href="/favicon.svg" type="image/svg+xml">'),
+     about=['MeshCore', 'Meshtastic', 'Reticulum'], icons='<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">'),
  'meshcore': dict(url='https://meshcore.scotmesh.net/', name='MeshCore in Scotland', title='MeshCore in Scotland — ScotMesh',
      desc="Scotland's MeshCore radio mesh: live map and packets, the settings that actually work here, and step-by-step guides for running a repeater or an observer.",
      og_title='MeshCore in Scotland', og_desc="Join Scotland's MeshCore mesh: the settings that work here, and how to run a repeater or an observer.",
