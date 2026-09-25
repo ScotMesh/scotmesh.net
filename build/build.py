@@ -107,6 +107,12 @@ HEAD = '''<title>ScotMesh</title>
     border: 1px solid var(--line); color: var(--ink); background: var(--card); }
   .btn-primary { background: var(--saltire); border-color: var(--saltire); color: #fff; }
   /* the map: one Scotland, three networks */
+  .hero-map-layer { position: relative; }
+  .hero-map-layer::after {
+    /* a soft field behind the map so the nodes sit in their own light */
+    content: ""; position: absolute; inset: 6% -6%; z-index: -1; pointer-events: none;
+    background: radial-gradient(60% 55% at 62% 62%, rgba(0,94,184,.16), transparent 70%);
+  }
   .scotmap { display: block; width: 100%; height: auto; max-height: 600px; margin-inline: auto; }
   .scotmap .coast { fill: none; stroke: var(--saltire); stroke-opacity: .95; stroke-width: 1.15;
     stroke-linejoin: round; stroke-linecap: round; }
@@ -586,7 +592,7 @@ BODY = '''
         <a class="btn" href="https://scotmesh.uk/" target="_blank" rel="noopener">Forum</a>
       </div>
     </div>
-    <div>
+    <div class="hero-map-layer">
       __MAP__
       <div class="legend">
         <span><i style="background:var(--meshcore)"></i>MeshCore</span>
@@ -651,7 +657,7 @@ __TOOLS__
 <footer>
   <div class="wrap foot-grid">
     <div>
-      <a class="lockup-scotmesh" href="https://scotmesh.uk/" aria-label="ScotMesh main site">__SM_DARK____SM_LIGHT__</a>
+      <a class="lockup-scotmesh" href="/" aria-label="ScotMesh home">__SM_DARK____SM_LIGHT__</a>
       <p style="margin:12px 0 0; max-width:36ch">
         Community-run radio networks across Scotland. The forum, the guides and the people are on
         the main site; this page is the live tools and infrastructure behind them.
