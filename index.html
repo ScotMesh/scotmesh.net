@@ -152,7 +152,10 @@
     border: 1px solid var(--line); color: var(--ink); background: var(--card); }
   .btn-primary { background: var(--saltire); border-color: var(--saltire); color: #fff; }
   /* the map: one Scotland, three networks */
-  .hero-map-layer { position: relative; }
+  /* z-index 0 makes this a stacking context. Without one the glow below, which
+     sits at -1, falls behind the page background instead of behind the map.
+     The MeshCore hero gets its context from .hero-grid; this one has none. */
+  .hero-map-layer { position: relative; z-index: 0; }
   .hero-map-layer::after {
     /* a soft field behind the map so the nodes sit in their own light */
     content: ""; position: absolute; inset: 6% -6%; z-index: -1; pointer-events: none;
