@@ -1,4 +1,5 @@
 """Shared SEO head and structured data for the four ScotMesh sites."""
+import re
 import json, datetime
 
 ORG_ID = 'https://scotmesh.net/#org'
@@ -90,10 +91,50 @@ def robots(key, disallow=()):
     lines = ['User-agent: *', 'Allow: /'] + ['Disallow: %s' % d for d in disallow] + ['', 'Sitemap: %ssitemap.xml' % SITES[key]['url'], '']
     return '\n'.join(lines)
 
-def sitemap(key, lastmod=None):
+def sitemap(key, lastmod=None, extra=()):
+    """The site's own URL, plus any further paths the build produced."""
     lastmod = lastmod or datetime.date.today().isoformat()
+    base = SITES[key]['url'].rstrip('/')
+    rows = ['  <url><loc>%s/</loc><lastmod>%s</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>'
+            % (base, lastmod)]
+    for path in extra:
+        rows.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod><changefreq>weekly</changefreq>'
+                    '<priority>0.7</priority></url>' % (base, path, lastmod))
     return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            '  <url><loc>%s</loc><lastmod>%s</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>\n</urlset>\n' % (SITES[key]['url'], lastmod))
+            + '\n'.join(rows) + '\n</urlset>\n')
+
+
+def _esc(t):
+    return (str(t).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+            .replace('"', '&quot;'))
+
+
+def page_head(title, desc, url, key='parent'):
+    """The head for a page that is not the front page: its own title, its own
+    description and its own canonical. These have to be in the HTML, because
+    the services that unfurl a shared link do not run scripts."""
+    s = SITES[key]
+    plain = re.sub(r'<[^>]+>', '', str(desc))
+    return ('<meta charset="utf-8">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+            '<title>%s \u2014 ScotMesh</title>\n'
+            '<meta name="description" content="%s">\n'
+            '<link rel="canonical" href="%s">\n'
+            '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">\n'
+            '<meta name="theme-color" content="%s">\n'
+            '<meta name="color-scheme" content="dark light">\n'
+            '<meta name="geo.region" content="GB-SCT">\n'
+            '%s\n'
+            '<meta property="og:type" content="article">\n'
+            '<meta property="og:site_name" content="ScotMesh">\n'
+            '<meta property="og:locale" content="en_GB">\n'
+            '<meta property="og:title" content="%s">\n'
+            '<meta property="og:description" content="%s">\n'
+            '<meta property="og:url" content="%s">\n'
+            '<meta property="og:image" content="%sog.png">\n'
+            '<meta name="twitter:card" content="summary_large_image">\n'
+            % (_esc(title), _esc(plain), url, s['theme'], s['icons'] or '',
+               _esc(title), _esc(plain), url, s['url']))
 
 def manifest(key, tint):
     s = SITES[key]

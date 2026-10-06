@@ -5,6 +5,7 @@ site also self-hosts IBM Plex under /fonts rather than pulling it from Google,
 which is how the previous page already worked.
 """
 import pathlib, re
+import news
 import seo
 
 page = pathlib.Path('page.html').read_text()
@@ -46,7 +47,8 @@ out = pathlib.Path('..')
 out.mkdir(exist_ok=True)
 (out / 'index.html').write_text(doc)
 (out / 'app.js').write_text(pathlib.Path('site-app.js').read_text())
+news_paths = news.build(page, seo, out)
 (out / 'robots.txt').write_text(seo.robots('parent'))
-(out / 'sitemap.xml').write_text(seo.sitemap('parent'))
+(out / 'sitemap.xml').write_text(seo.sitemap('parent', extra=news_paths))
 print('index.html %.0f KB, app.js %.1f KB' %
       (len(doc) / 1024, len((out / 'app.js').read_text()) / 1024))
