@@ -567,10 +567,10 @@ BODY = '''
   <div class="wrap">
     <a class="lockup" href="#top" aria-label="ScotMesh — home">__SM_DARK____SM_LIGHT__</a>
     <nav aria-label="Primary">
-      <a href="/news/">News</a>
       <a href="https://meshcore.scotmesh.net/" data-net="meshcore">MeshCore</a>
       <a href="https://meshtastic.scotmesh.net/" data-net="meshtastic">Meshtastic</a>
       <a href="https://rns.scotmesh.net/" data-net="reticulum">Reticulum</a>
+      <a href="/news/">News</a>
       <a href="https://scotmesh.uk/" target="_blank" rel="noopener">Forum</a>
       <a href="https://discord.gg/ytxfyuDmSt" target="_blank" rel="noopener">Discord</a>
       <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light theme" title="Switch theme">
