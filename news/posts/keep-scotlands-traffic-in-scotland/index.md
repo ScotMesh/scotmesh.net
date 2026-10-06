@@ -3,7 +3,7 @@ title: "Keep Scotland's traffic in Scotland"
 date: 2026-10-06T21:30:00+01:00
 author: Alex
 network: meshcore
-summary: "Scotland is adding sco-admin, a region for the traffic that keeps the mesh running rather than the traffic people send each other. Every repeater should carry it, whether or not you ever use MeshMapper."
+summary: "Every Scottish repeater needs a new region, sco-admin. It carries the mesh's own housekeeping, mapping and bots and the like, and unlike sco it never leaves the country. Two lines on the console."
 banner:
   src: images/cover.svg
   alt: "The MeshMapper mark and the ScotMesh mark side by side"

@@ -87,6 +87,9 @@ def chrome(page):
     if not styles:
         raise SystemExit('news: no stylesheet in page.html')
     nav = page[page.index('<header class="nav">'):page.index('<main')]
+    # The home page scrolls to its own top; from a news page the mark has to go
+    # home, or clicking it does nothing at all.
+    nav = nav.replace('<a class="lockup" href="#top"', '<a class="lockup" href="/"')
     foot = page[page.index('<footer>'):]
     foot = re.sub(r'<script[^>]*src="/app\.js"[^>]*>\s*</script>\s*', '', foot)
     return ''.join(styles), nav, foot
