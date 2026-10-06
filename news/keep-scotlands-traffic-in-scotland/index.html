@@ -251,7 +251,10 @@
   .news-head { display: grid; gap: 10px; justify-items: start; padding-block: 10px 24px; }
   .news-head h1 { margin: 0; }
   .news-head p { margin: 0; color: var(--muted); max-width: 60ch; }
-  .news-list { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+  /* auto-fill, not auto-fit: auto-fit collapses the empty tracks, so a single
+     post stretched the whole width and its cover came out enormous. The wrap
+     is 1140px, which gives three columns and leaves the gaps empty. */
+  .news-list { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
   .post-card { display: grid; border: 1px solid var(--line); border-radius: 12px; background: var(--card);
     overflow: hidden; text-decoration: none; color: inherit; }
   .post-card:hover { border-color: color-mix(in srgb, var(--saltire) 45%, var(--line)); }
