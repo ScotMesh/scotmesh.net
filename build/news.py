@@ -84,7 +84,7 @@ RESET = '''<style>
 
 
 def chrome(page):
-    """The whole stylesheet, the nav and the footer, from the page the build
+    """The theme script, the whole stylesheet, the nav and the footer, from the page the build
     just made, so a news page cannot drift from the site around it."""
     styles = re.findall(r'<style>.*?</style>', page, re.S)
     if not styles:
@@ -95,7 +95,10 @@ def chrome(page):
     nav = nav.replace('<a class="lockup" href="#top"', '<a class="lockup" href="/"')
     foot = page[page.index('<footer>'):]
     foot = re.sub(r'<script[^>]*src="/app\.js"[^>]*>\s*</script>\s*', '', foot)
-    return ''.join(styles), nav, foot
+    theme = re.search(r'<script>\s*/\* Apply the saved theme.*?</script>', page, re.S)
+    if not theme:
+        raise SystemExit('news: no theme script in page.html')
+    return theme.group(0) + '\n' + ''.join(styles), nav, foot
 
 
 def front_matter(path):

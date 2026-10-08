@@ -7,11 +7,15 @@ HEAD = '''<title>ScotMesh</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@400;600&display=swap">
 <script>
+  /* Apply the saved theme before first paint. A choice made on any of the
+     scotmesh.net sites is shared through a cookie on .scotmesh.net; this
+     site's own storage is the fallback, so a choice made before the cookie
+     existed still counts. */
   (function () {
-    try {
-      var t = localStorage.getItem('scotmesh-theme');
-      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
-    } catch (e) {}
+    var t = null;
+    try { var m = document.cookie.match(/(?:^|; *)scotmesh-theme=(light|dark)/); if (m) t = m[1]; } catch (e) {}
+    if (!t) { try { t = localStorage.getItem('scotmesh-theme'); } catch (e) {} }
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
   })();
 </script>
 <style>
@@ -62,7 +66,7 @@ HEAD = '''<title>ScotMesh</title>
     background: var(--bg); background: color-mix(in srgb, var(--bg) 92%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line); }
   .nav .wrap { display: flex; align-items: center; gap: 12px; min-height: 60px; flex-wrap: wrap; }
-  .lockup { display: block; margin-right: auto; }
+  .lockup { display: block; }
   .lockup svg { display: block; height: 30px; width: auto; }
   .lockup .on-light { display: none; }
   @media (prefers-color-scheme: light) {
@@ -71,7 +75,7 @@ HEAD = '''<title>ScotMesh</title>
   }
   :root[data-theme="light"] .lockup .on-light { display: block; }
   :root[data-theme="light"] .lockup .on-dark { display: none; }
-  .nav nav { display: flex; align-items: center; gap: 3px; flex-wrap: wrap; }
+  .nav nav { display: flex; margin-left: auto; align-items: center; gap: 3px; flex-wrap: wrap; }
   .nav nav a { font-family: var(--mono); font-size: 13.5px; text-decoration: none; color: var(--muted);
     padding: 7px 10px; border-radius: 6px; }
   .nav nav a:hover { color: var(--ink); background: var(--well); }
@@ -79,6 +83,31 @@ HEAD = '''<title>ScotMesh</title>
     height: 32px; padding: 0; color: var(--muted); background: none; border: 1px solid transparent;
     border-radius: 6px; cursor: pointer; }
   .theme-toggle:hover { color: var(--ink); background: var(--well); }
+
+  .theme-toggle { margin-left: 4px; }
+  /* Icon links keep their word for screen readers, and show it again in the phone menu. */
+  .nav nav a.icon { display: inline-flex; align-items: center; gap: 10px; padding: 7px 9px; }
+  .nav nav a.icon svg { display: block; flex: none; }
+  .nav nav a.icon .icon-word { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  /* The menu button. Below 760px the bar keeps the mark, the theme toggle and
+     this button, and the links drop down underneath when asked for. */
+  .nav-toggle { display: none; align-items: center; gap: 7px; margin-left: auto; font-family: var(--mono);
+    font-size: 13.5px; color: var(--ink); background: var(--card); border: 1px solid var(--line);
+    border-radius: 8px; padding: 7px 12px; cursor: pointer; }
+  .nav-toggle[aria-expanded="true"] { border-color: var(--chrome-ink); }
+  @media (max-width: 760px) {
+    .nav-toggle { display: inline-flex; }
+    .nav .wrap { flex-wrap: wrap; row-gap: 10px; }
+    .nav nav { display: none; order: 3; width: 100%; margin-left: 0; flex-direction: column;
+      align-items: stretch; gap: 2px; padding-bottom: 10px; }
+    .nav .wrap[data-menu="open"] nav { display: flex; }
+    .nav nav a, .nav nav button { padding: 10px 12px; text-align: left; font-size: 15px; }
+    .nav nav a.icon { padding: 10px 12px; }
+    .nav nav a.icon .icon-word { position: static; width: auto; height: auto; margin: 0;
+      overflow: visible; clip-path: none; }
+  }
   .theme-toggle .t-light { display: none; } .theme-toggle .t-dark { display: block; }
   @media (prefers-color-scheme: light) {
     :root:not([data-theme="dark"]) .theme-toggle .t-dark { display: none; }
@@ -566,17 +595,22 @@ BODY = '''
 <header class="nav">
   <div class="wrap">
     <a class="lockup" href="#top" aria-label="ScotMesh — home">__SM_DARK____SM_LIGHT__</a>
-    <nav aria-label="Primary">
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light theme" title="Switch theme">
+        <svg class="t-dark" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
+        <svg class="t-light" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4 8.3 8.3 0 1 0 20 14.5Z"/></svg>
+    </button>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      Menu
+    </button>
+    <nav id="primary-nav" aria-label="Primary">
       <a href="https://meshcore.scotmesh.net/" data-net="meshcore">MeshCore</a>
       <a href="https://meshtastic.scotmesh.net/" data-net="meshtastic">Meshtastic</a>
       <a href="https://rns.scotmesh.net/" data-net="reticulum">Reticulum</a>
       <a href="/news/">News</a>
       <a href="https://scotmesh.uk/" target="_blank" rel="noopener">Forum</a>
-      <a href="https://discord.gg/ytxfyuDmSt" target="_blank" rel="noopener">Discord</a>
-      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light theme" title="Switch theme">
-        <svg class="t-dark" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
-        <svg class="t-light" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4 8.3 8.3 0 1 0 20 14.5Z"/></svg>
-      </button>
+      <a class="ext icon" href="https://discord.gg/ytxfyuDmSt" target="_blank" rel="noopener" aria-label="ScotMesh on Discord" title="Discord"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.79.037c-.211.375-.445.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.32.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .31.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .79.009c.12.099.245.198.372.292a.077.077 0 0 1-.6.127c-.598.35-1.22.644-1.873.891a.077.077 0 0 0-.41.107c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .84.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .031-.056c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028ZM8.02 15.331c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z"/></svg><span class="icon-word">Discord</span></a>
+      <a class="ext icon" href="https://github.com/ScotMesh" target="_blank" rel="noopener" aria-label="ScotMesh on GitHub" title="GitHub"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1-.02-1.96-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A11.53 11.53 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5Z"/></svg><span class="icon-word">GitHub</span></a>
     </nav>
   </div>
 </header>
@@ -692,6 +726,24 @@ __TOOLS__
 </footer>
 
 <script>
+  /* Below 760px the links fold behind the menu button. Following a link closes
+     it, so the menu never stays open over the place the reader asked for. */
+  (function () {
+    var bar = document.querySelector('.nav .wrap');
+    var btn = document.getElementById('nav-toggle');
+    if (!bar || !btn) return;
+    function set(open) {
+      bar.setAttribute('data-menu', open ? 'open' : 'shut');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function () { set(bar.getAttribute('data-menu') !== 'open'); });
+    bar.querySelectorAll('nav a, nav button').forEach(function (el) {
+      el.addEventListener('click', function () { set(false); });
+    });
+    set(false);
+  })();
+</script>
+<script>
   (function () {
     var root = document.documentElement;
     var btn = document.getElementById('theme-toggle');
@@ -708,6 +760,7 @@ __TOOLS__
       var next = current() === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       try { localStorage.setItem('scotmesh-theme', next); } catch (e) {}
+      try { document.cookie = 'scotmesh-theme=' + next + '; domain=.scotmesh.net; path=/; max-age=31536000; samesite=lax; secure'; } catch (e) { /* shared choice is a nicety */ }
       label();
     });
     label();
