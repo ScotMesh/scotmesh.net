@@ -8,17 +8,17 @@ SAMEAS = ['https://scotmesh.uk/', 'https://wiki.scotmesh.uk/', 'https://discord.
           'https://github.com/ScotMesh']
 ORG = {'@type': 'Organization', '@id': ORG_ID, 'name': 'ScotMesh', 'url': 'https://scotmesh.net/',
        'logo': {'@type': 'ImageObject', 'url': 'https://scotmesh.net/logo.png'},
-       'description': 'Community-run mesh radio networks across Scotland: MeshCore, Meshtastic and Reticulum.',
+       'description': 'Community-run mesh radio networks across Scotland: MeshCore and Meshtastic.',
        'areaServed': {'@type': 'Country', 'name': 'Scotland'}, 'sameAs': SAMEAS}
 
 SITES = {
  'parent': dict(url='https://scotmesh.net/', name='ScotMesh', title='ScotMesh — Community Mesh Networks in Scotland',
-     desc='ScotMesh is the community mesh network of Scotland: MeshCore, Meshtastic and Reticulum. What each network is, where the nodes are, live activity, and how to join.',
+     desc='ScotMesh is the community mesh network of Scotland: MeshCore and Meshtastic. What each network is, where the nodes are, live activity, and how to join.',
      og_title='ScotMesh — the community mesh networks of Scotland',
-     og_desc='MeshCore, Meshtastic and Reticulum across Scotland: what each one is, where the nodes are, and how to join.',
-     image='https://scotmesh.net/og.png', image_alt='ScotMesh: three meshes across Scotland, one community', theme='#0A1424',
-     keywords='mesh network Scotland, MeshCore Scotland, Meshtastic Scotland, Reticulum Scotland, LoRa mesh Scotland, ScotMesh',
-     about=['MeshCore', 'Meshtastic', 'Reticulum'], icons='<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n<link rel="icon" href="/favicon.ico" sizes="32x32">\n<link rel="icon" href="/icons/favicon-48.png" sizes="48x48" type="image/png">\n<link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png">\n<link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<link rel="manifest" href="/site.webmanifest">'),
+     og_desc='MeshCore and Meshtastic across Scotland: what each one is, where the nodes are, and how to join.',
+     image='https://scotmesh.net/og.png', image_alt='ScotMesh: two meshes across Scotland, one community', theme='#0A1424',
+     keywords='mesh network Scotland, MeshCore Scotland, Meshtastic Scotland, LoRa mesh Scotland, ScotMesh',
+     about=['MeshCore', 'Meshtastic'], icons='<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n<link rel="icon" href="/favicon.ico" sizes="32x32">\n<link rel="icon" href="/icons/favicon-48.png" sizes="48x48" type="image/png">\n<link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png">\n<link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<link rel="manifest" href="/site.webmanifest">'),
  'meshcore': dict(url='https://meshcore.scotmesh.net/', name='MeshCore in Scotland', title='MeshCore in Scotland — ScotMesh',
      desc="Scotland's MeshCore radio mesh: live map and packets, the settings that actually work here, and step-by-step guides for running a repeater or an observer.",
      og_title='MeshCore in Scotland', og_desc="Join Scotland's MeshCore mesh: the settings that work here, and how to run a repeater or an observer.",

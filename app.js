@@ -2,7 +2,7 @@
 //
 // The page ships with the last known numbers baked in, so it reads correctly
 // before this runs and if a feed is down. Each network's own site publishes a
-// small JSON document; we read all three cross-origin and update the card for
+// small JSON document; we read both cross-origin and update the card for
 // that network only. A feed that fails leaves its card's shipped figures alone.
 (function () {
   'use strict';
@@ -41,15 +41,6 @@
       set('meshtastic', 'nodes', Array.isArray(d.nodes) ? d.nodes.length : d.nodes);
       set('meshtastic', 'routers', d.roles && d.roles.ROUTER);
       set('meshtastic', 'packets', d.packets_today);
-    });
-    get('https://rns.scotmesh.net/status.json', function (d) {
-      set('reticulum', 'clients', d.clients);
-      if (d.peers && typeof d.peers === 'object') {
-        var names = Object.keys(d.peers), up = 0;
-        names.forEach(function (k) { if (d.peers[k]) up++; });
-        if (names.length) set('reticulum', 'peers', up + '/' + names.length);
-      }
-      set('reticulum', 'uptime', days(d.transport_uptime_s));
     });
   }
 

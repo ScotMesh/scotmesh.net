@@ -49,6 +49,6 @@ out.mkdir(exist_ok=True)
 (out / 'app.js').write_text(pathlib.Path('site-app.js').read_text())
 news_paths = news.build(page, seo, out)
 (out / 'robots.txt').write_text(seo.robots('parent'))
-(out / 'sitemap.xml').write_text(seo.sitemap('parent', extra=news_paths))
+(out / 'sitemap.xml').write_text(seo.sitemap('parent', extra=[*news_paths, '/whatisthisthing/']))
 print('index.html %.0f KB, app.js %.1f KB' %
       (len(doc) / 1024, len((out / 'app.js').read_text()) / 1024))

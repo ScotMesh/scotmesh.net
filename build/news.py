@@ -38,7 +38,7 @@ CSS = '''<style>
   .eyebrow .pip { width: 8px; height: 8px; border-radius: 50%; background: var(--tint); flex: none; }
   .byline { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
   .tint-meshcore { --tint: var(--meshcore); } .tint-meshtastic { --tint: var(--meshtastic); }
-  .tint-reticulum { --tint: var(--reticulum); } .tint-all { --tint: var(--saltire); }
+  .tint-all { --tint: var(--saltire); }
 
   .article { max-width: 70ch; margin-inline: auto; display: grid; gap: 16px; padding-block: 10px 12px; }
   .article .head { display: grid; gap: 9px; }
@@ -124,14 +124,14 @@ def build(page, seo, out):
 
     index = ('<main><section><div class="wrap">'
              '<div class="news-head"><h1>News</h1>'
-             '<p>What is going up, what is going down, and what changed on the three networks '
+             '<p>What is going up, what is going down, and what changed on the two networks '
              'ScotMesh runs.</p></div>'
              '<div class="news-list" id="news-list"></div>'
              '</div></section></main>')
     (news / 'index.html').write_text(shell(
         seo, styles, nav, foot, 'News',
-        'Announcements and changes across the three mesh networks ScotMesh runs in Scotland: '
-        'MeshCore, Meshtastic and Reticulum.', BASE + '/news/', index))
+        'Announcements and changes across the two mesh networks ScotMesh runs in Scotland: '
+        'MeshCore and Meshtastic.', BASE + '/news/', index))
 
     for slug in slugs:
         meta = front_matter(news / 'posts' / slug / 'index.md')

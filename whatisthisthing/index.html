@@ -44,14 +44,13 @@
 @font-face{font-family:"IBM Plex Sans Condensed";font-weight:400;font-style:normal;font-display:swap;src:url(/fonts/ibm-plex-sans-condensed-400.woff2) format("woff2")}
 @font-face{font-family:"IBM Plex Sans Condensed";font-weight:600;font-style:normal;font-display:swap;src:url(/fonts/ibm-plex-sans-condensed-600.woff2) format("woff2")}
 </style><style>
-  /* ScotMesh brand tokens. This is the one page where all three network tints
+  /* ScotMesh brand tokens. This is the one page where both network tints
      appear together, so Saltire stays the page's own chrome and each tint
      belongs strictly to its network's section. */
   :root {
     --night: #0A1424; --saltire: #005EB8; --mist: #E6EDF7; --signal: #F2B33D;
     --meshcore: #56B4F5;   --meshcore-deep: #0069A6;
     --meshtastic: #65C281; --meshtastic-deep: #05773B;
-    --reticulum: #B199F4;  --reticulum-deep: #6A51A4;
 
     --bg: var(--night); --well: #0C1729; --card: #101C30; --line: #22324D;
     --ink: var(--mist); --muted: #8FA2BD; --link: #7FB2EE;
@@ -66,7 +65,7 @@
     :root:not([data-theme="dark"]) {
       --bg: #F4F7FC; --well: #EAF0F9; --card: #FFF; --line: #D3DEEE;
       --ink: var(--night); --muted: #5A6B85; --link: var(--saltire); --chrome-ink: var(--saltire);
-      --meshcore: var(--meshcore-deep); --meshtastic: var(--meshtastic-deep); --reticulum: var(--reticulum-deep);
+      --meshcore: var(--meshcore-deep); --meshtastic: var(--meshtastic-deep);
       --good: #05773B; --bad: #A61B28;
       --shadow: 0 1px 0 rgba(255,255,255,.7), 0 12px 28px -20px rgba(10,20,36,.45);
     }
@@ -74,7 +73,7 @@
   :root[data-theme="light"] {
     --bg: #F4F7FC; --well: #EAF0F9; --card: #FFF; --line: #D3DEEE;
     --ink: var(--night); --muted: #5A6B85; --link: var(--saltire); --chrome-ink: var(--saltire);
-    --meshcore: var(--meshcore-deep); --meshtastic: var(--meshtastic-deep); --reticulum: var(--reticulum-deep);
+    --meshcore: var(--meshcore-deep); --meshtastic: var(--meshtastic-deep);
     --good: #05773B; --bad: #A61B28;
     --shadow: 0 1px 0 rgba(255,255,255,.7), 0 12px 28px -20px rgba(10,20,36,.45);
   }
@@ -150,7 +149,7 @@
   .hero { position: relative; overflow: hidden; border-bottom: 1px solid #22324D;
     color: var(--ink); background: var(--bg);
     --bg: #0A1424; --ink: #E6EDF7; --muted: #8FA2BD; --line: #22324D; --card: #101C30;
-    --meshcore: #56B4F5; --meshtastic: #65C281; --reticulum: #B199F4; --chrome-ink: #7FB2EE; }
+    --meshcore: #56B4F5; --meshtastic: #65C281; --chrome-ink: #7FB2EE; }
   .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
     gap: 40px; align-items: center; padding-block: 56px 26px; }
   h1 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.07; letter-spacing: -0.01em; max-width: 18ch; }
@@ -160,7 +159,7 @@
     font-weight: 600; text-decoration: none; padding: 11px 17px; border-radius: 8px;
     border: 1px solid var(--line); color: var(--ink); background: var(--card); }
   .btn-primary { background: var(--saltire); border-color: var(--saltire); color: #fff; }
-  /* the map: one Scotland, three networks */
+  /* the map: one Scotland, two networks */
   /* z-index 0 makes this a stacking context. Without one the glow below, which
      sits at -1, falls behind the page background instead of behind the map.
      The MeshCore hero gets its context from .hero-grid; this one has none. */
@@ -186,10 +185,10 @@
   @media (prefers-reduced-motion: reduce) { .scotmap .ring, .scotmap .pulse { display: none; } }
   .hero .nets { position: relative; padding-top: 6px; }
 
-  /* The three networks, side by side. This is the page's argument: the only
-     place all three exist together, each answering "is this the one for me?"
+  /* The two networks, side by side. This is the page's argument: the only
+     place both exist together, each answering "is this the one for me?"
      with a live figure rather than a claim. */
-  .nets { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; padding-block: 34px 52px; }
+  .nets { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; padding-block: 34px 52px; }
   .net { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 22px;
     background: var(--card); border: 1px solid var(--line); border-radius: 12px;
     box-shadow: var(--shadow); text-decoration: none; color: inherit;
@@ -304,7 +303,7 @@
   .eyebrow .pip { width: 8px; height: 8px; border-radius: 50%; background: var(--tint); flex: none; }
   .byline { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
   .tint-meshcore { --tint: var(--meshcore); } .tint-meshtastic { --tint: var(--meshtastic); }
-  .tint-reticulum { --tint: var(--reticulum); } .tint-all { --tint: var(--saltire); }
+  .tint-all { --tint: var(--saltire); }
 
   .article { max-width: 70ch; margin-inline: auto; display: grid; gap: 16px; padding-block: 10px 12px; }
   .article .head { display: grid; gap: 9px; }
@@ -391,7 +390,6 @@
     <nav id="primary-nav" aria-label="Primary">
       <a href="https://meshcore.scotmesh.net/" data-net="meshcore">MeshCore</a>
       <a href="https://meshtastic.scotmesh.net/" data-net="meshtastic">Meshtastic</a>
-      <a href="https://rns.scotmesh.net/" data-net="reticulum">Reticulum</a>
       <a href="/news/">News</a>
       <a href="https://scotmesh.uk/" target="_blank" rel="noopener">Forum</a>
       <a class="ext icon" href="https://discord.gg/ytxfyuDmSt" target="_blank" rel="noopener" aria-label="ScotMesh on Discord" title="Discord"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.79.037c-.211.375-.445.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.32.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .31.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .79.009c.12.099.245.198.372.292a.077.077 0 0 1-.6.127c-.598.35-1.22.644-1.873.891a.077.077 0 0 0-.41.107c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .84.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .031-.056c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028ZM8.02 15.331c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z"/></svg><span class="icon-word">Discord</span></a>
@@ -485,7 +483,6 @@
       <ul>
         <li><a href="https://meshcore.scotmesh.net/">MeshCore in Scotland</a></li>
         <li><a href="https://meshtastic.scotmesh.net/">Meshtastic in Scotland</a></li>
-        <li><a href="https://rns.scotmesh.net/">Reticulum in Scotland</a></li>
       </ul>
     </div>
     <div class="foot-bar">

@@ -19,14 +19,13 @@ HEAD = '''<title>ScotMesh</title>
   })();
 </script>
 <style>
-  /* ScotMesh brand tokens. This is the one page where all three network tints
+  /* ScotMesh brand tokens. This is the one page where both network tints
      appear together, so Saltire stays the page's own chrome and each tint
      belongs strictly to its network's section. */
   :root {
     --night: #0A1424; --saltire: #005EB8; --mist: #E6EDF7; --signal: #F2B33D;
     --meshcore: #56B4F5;   --meshcore-deep: #0069A6;
     --meshtastic: #65C281; --meshtastic-deep: #05773B;
-    --reticulum: #B199F4;  --reticulum-deep: #6A51A4;
 
     --bg: var(--night); --well: #0C1729; --card: #101C30; --line: #22324D;
     --ink: var(--mist); --muted: #8FA2BD; --link: #7FB2EE;
@@ -41,7 +40,7 @@ HEAD = '''<title>ScotMesh</title>
     :root:not([data-theme="dark"]) {
       --bg: #F4F7FC; --well: #EAF0F9; --card: #FFF; --line: #D3DEEE;
       --ink: var(--night); --muted: #5A6B85; --link: var(--saltire); --chrome-ink: var(--saltire);
-      --meshcore: var(--meshcore-deep); --meshtastic: var(--meshtastic-deep); --reticulum: var(--reticulum-deep);
+      --meshcore: var(--meshcore-deep); --meshtastic: var(--meshtastic-deep);
       --good: #05773B; --bad: #A61B28;
       --shadow: 0 1px 0 rgba(255,255,255,.7), 0 12px 28px -20px rgba(10,20,36,.45);
     }
@@ -49,7 +48,7 @@ HEAD = '''<title>ScotMesh</title>
   :root[data-theme="light"] {
     --bg: #F4F7FC; --well: #EAF0F9; --card: #FFF; --line: #D3DEEE;
     --ink: var(--night); --muted: #5A6B85; --link: var(--saltire); --chrome-ink: var(--saltire);
-    --meshcore: var(--meshcore-deep); --meshtastic: var(--meshtastic-deep); --reticulum: var(--reticulum-deep);
+    --meshcore: var(--meshcore-deep); --meshtastic: var(--meshtastic-deep);
     --good: #05773B; --bad: #A61B28;
     --shadow: 0 1px 0 rgba(255,255,255,.7), 0 12px 28px -20px rgba(10,20,36,.45);
   }
@@ -125,7 +124,7 @@ HEAD = '''<title>ScotMesh</title>
   .hero { position: relative; overflow: hidden; border-bottom: 1px solid #22324D;
     color: var(--ink); background: var(--bg);
     --bg: #0A1424; --ink: #E6EDF7; --muted: #8FA2BD; --line: #22324D; --card: #101C30;
-    --meshcore: #56B4F5; --meshtastic: #65C281; --reticulum: #B199F4; --chrome-ink: #7FB2EE; }
+    --meshcore: #56B4F5; --meshtastic: #65C281; --chrome-ink: #7FB2EE; }
   .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
     gap: 40px; align-items: center; padding-block: 56px 26px; }
   h1 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.07; letter-spacing: -0.01em; max-width: 18ch; }
@@ -135,7 +134,7 @@ HEAD = '''<title>ScotMesh</title>
     font-weight: 600; text-decoration: none; padding: 11px 17px; border-radius: 8px;
     border: 1px solid var(--line); color: var(--ink); background: var(--card); }
   .btn-primary { background: var(--saltire); border-color: var(--saltire); color: #fff; }
-  /* the map: one Scotland, three networks */
+  /* the map: one Scotland, two networks */
   /* z-index 0 makes this a stacking context. Without one the glow below, which
      sits at -1, falls behind the page background instead of behind the map.
      The MeshCore hero gets its context from .hero-grid; this one has none. */
@@ -161,10 +160,10 @@ HEAD = '''<title>ScotMesh</title>
   @media (prefers-reduced-motion: reduce) { .scotmap .ring, .scotmap .pulse { display: none; } }
   .hero .nets { position: relative; padding-top: 6px; }
 
-  /* The three networks, side by side. This is the page's argument: the only
-     place all three exist together, each answering "is this the one for me?"
+  /* The two networks, side by side. This is the page's argument: the only
+     place both exist together, each answering "is this the one for me?"
      with a live figure rather than a claim. */
-  .nets { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; padding-block: 34px 52px; }
+  .nets { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; padding-block: 34px 52px; }
   .net { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 22px;
     background: var(--card); border: 1px solid var(--line); border-radius: 12px;
     box-shadow: var(--shadow); text-decoration: none; color: inherit;
@@ -266,15 +265,9 @@ NETS = [
     dict(id='meshtastic', name='Meshtastic', tint='var(--meshtastic)', href='https://meshtastic.scotmesh.net/',
          who="Scotland's Original Mesh",
          blurb='Long-range LoRa messaging with an app on your phone. Scotland only, and the '
-               'easiest of the three to get the hang of — the widest hardware support, the most '
+               'easier of the two to get the hang of — the widest hardware support, the most '
                'documentation, and the largest node count here.',
          vitals=[('nodes', '293', 'nodes heard'), ('routers', '17', 'routers'), ('packets', '63', 'packets today')]),
-    dict(id='reticulum', name='Reticulum', tint='var(--reticulum)', href='https://rns.scotmesh.net/',
-         who='No Radio Needed',
-         blurb='An encrypted network with no accounts and no central authority, carried over LoRa, '
-               'I2P or plain internet. The only one of the three you can join without buying '
-               'anything: connect over the internet, and add a radio later if you want one.',
-         vitals=[('clients', '155', 'clients'), ('peers', '4/4', 'peers linked'), ('uptime', '15d', 'uptime')]),
 ]
 
 
@@ -286,7 +279,6 @@ def traffic(P):
     at up to ~50 km a hop, starting from a companion where one is close; that
     is how a MeshCore message crosses the country. Meshtastic bursts flood
     two or three neighbours within a few km and stop, as a hop limit does.
-    Reticulum has one gateway here, so it rings; nothing else is invented.
     """
     import math, random
     rnd = random.Random(2026)
@@ -356,19 +348,14 @@ def traffic(P):
         for f in first: out.append(pulse(o, f, t0 + 0.2, 0.7))
         for f, q in second: out.append(pulse(f, q, t0 + 1.0, 0.7))
 
-    # --- Reticulum: the gateway announces ---------------------------------
-    gx, gy = P['rns'][0]
-    out.append('<circle class="pulse ring" cx="%.1f" cy="%.1f" r="4" fill="none" stroke="var(--reticulum)" stroke-width="1.2"/>' % (gx, gy))
     return ''.join(out)
 
 
 def scotmap():
-    """One Scotland, all three networks on it, from each network's own data.
+    """One Scotland, both networks on it, from each network's own data.
 
     MeshCore and Meshtastic are real node positions (CoreScope and the
     Meshtastic site's feed), projected with the coastline's own maths.
-    Reticulum is honest about what it is: one LoRa gateway at Cadham, with
-    the network itself reached over the internet rather than the air.
     """
     P = json.loads(pathlib.Path('points.json').read_text())
     coast = pathlib.Path('coast.txt').read_text()
@@ -376,7 +363,7 @@ def scotmap():
     inset = pathlib.Path('inset.txt').read_text()
     X0, Y0, W, H = -8, -8, 536, 679
     band = H / 5 * 0.62
-    o = ['<svg xmlns:xlink="http://www.w3.org/1999/xlink" class="scotmap" viewBox="%d %d %d %d" role="img" aria-label="Map of Scotland with every MeshCore and Meshtastic node heard, in each network\'s colour, and the Reticulum gateway at Cadham">' % (X0, Y0, W, H)]
+    o = ['<svg xmlns:xlink="http://www.w3.org/1999/xlink" class="scotmap" viewBox="%d %d %d %d" role="img" aria-label="Map of Scotland with every MeshCore and Meshtastic node heard, in each network\'s colour">' % (X0, Y0, W, H)]
     # the saltire on the land, quiet, as on the sibling sites
     o.append('<defs><clipPath id="scot-clip"><path d="%s"/></clipPath></defs>' % land)
     o.append('<g clip-path="url(#scot-clip)"><rect x="%d" y="%d" width="%d" height="%d" fill="#122140"/>'
@@ -396,8 +383,6 @@ def scotmap():
         r = 2.6 if role in ('ROUTER', 'ROUTER_LATE') else 1.9
         o.append('<circle cx="%s" cy="%s" r="%s" fill="var(--meshtastic)"%s/>' % (x, y, r, halo))
     o.append('</g>')
-    gx, gy = P['rns'][0]
-    o.append('<g class="rns"><circle cx="%.1f" cy="%.1f" r="4" fill="var(--reticulum)"%s/></g>' % (gx, gy, halo))
     o.append('<g class="traffic">%s</g>' % traffic(P))
     o.append('</svg>')
     return ''.join(o)
@@ -489,70 +474,6 @@ def diagram_meshtastic():
     return ''.join(o)
 
 
-def diagram_reticulum():
-    """Encrypted end to end, over whatever bearer is there — and there are many.
-
-    A graph rather than a line: two routes from you to them, crossing seven
-    different bearers, including the two meshes on this page (RNS runs over
-    both, via ScotMesh's own forks). Two sealed packets take different routes
-    at once, which is the point: the network finds a way, and does not care
-    which links it used.
-    """
-    N = {'you': (36, 136), 'A': (150, 78), 'D': (150, 196), 'S': (258, 24), 'B': (330, 78),
-         'E': (290, 204), 'C': (400, 136), 'them': (484, 136)}
-    # edge: (from, to, bearer, style)
-    E = [('you', 'A', 'LoRa', 'wave'), ('you', 'D', 'MeshCore', 'dash6'), ('A', 'S', 'satellite', 'dot'),
-         ('S', 'B', 'satellite', 'dot'), ('A', 'B', 'Wi-Fi', 'dash2'), ('D', 'E', 'Meshtastic', 'dash6'),
-         ('B', 'C', 'internet', 'solid'), ('E', 'C', 'internet', 'solid'), ('C', 'them', 'I2P', 'dash4'),
-         ('E', 'them', 'radio', 'wave')]
-    dash = {'wave': '', 'solid': '', 'dot': ' stroke-dasharray="2 4"', 'dash2': ' stroke-dasharray="2 2"',
-            'dash4': ' stroke-dasharray="5 4"', 'dash6': ' stroke-dasharray="8 3"'}
-    def wave(x1, y1, x2, y2):
-        # a LoRa link drawn as a wave along the straight line between the nodes
-        import math
-        dx, dy = x2 - x1, y2 - y1; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy, ux
-        n = max(3, int(L / 22)); d = 'M%.1f %.1f' % (x1, y1)
-        for i in range(1, n + 1):
-            t = i / n; px, py = x1 + dx * t, y1 + dy * t
-            cx, cy = x1 + dx * (t - 0.5 / n), y1 + dy * (t - 0.5 / n)
-            amp = 6 if i % 2 else -6
-            d += ' Q%.1f %.1f %.1f %.1f' % (cx + nx * amp, cy + ny * amp, px, py)
-        return d
-    o = ['<svg class="diagram" viewBox="0 0 520 250" role="img" aria-label="Two encrypted messages cross a small network from you to them by different routes, over LoRa, MeshCore, Meshtastic, satellite, Wi-Fi, the internet and I2P">']
-    for f, t, name, st in E:
-        (x1, y1), (x2, y2) = N[f], N[t]
-        if st == 'wave':
-            o.append('<path d="%s" fill="none" stroke="var(--reticulum)" stroke-opacity=".45" stroke-width="1.5"/>' % wave(x1, y1, x2, y2))
-        else:
-            o.append('<line x1="%d" y1="%d" x2="%d" y2="%d" stroke="var(--reticulum)" stroke-opacity=".45" stroke-width="1.5"%s/>' % (x1, y1, x2, y2, dash[st]))
-        mx, my = (x1 + x2) / 2, (y1 + y2) / 2
-        # nudge labels off the line
-        off = -7 if (f, t) not in (('you', 'D'), ('D', 'E'), ('E', 'them')) else 13   # E->C stays above its line, clear of 'radio'
-        o.append('<text x="%.0f" y="%.0f" text-anchor="middle" font-size="9.5">%s</text>' % (mx, my + off, name))
-    # the satellite
-    sx, sy = N['S']
-    o.append('<g transform="translate(%d %d)"><rect x="-5" y="-5" width="10" height="10" fill="#101C30" stroke="var(--reticulum)" stroke-width="1.4"/>'
-             '<line x1="-16" y1="0" x2="-6" y2="0" stroke="var(--reticulum)" stroke-width="3"/><line x1="6" y1="0" x2="16" y2="0" stroke="var(--reticulum)" stroke-width="3"/></g>' % (sx, sy))
-    for k in ('A', 'B', 'C', 'D', 'E'):
-        x, y = N[k]
-        o.append('<circle cx="%d" cy="%d" r="8" fill="#101C30" stroke="var(--reticulum)" stroke-width="1.6"/>' % (x, y))
-    for k, lbl in (('you', 'you'), ('them', 'them')):
-        x, y = N[k]
-        o.append('<rect x="%d" y="%d" width="22" height="16" rx="3" fill="#101C30" stroke="var(--muted)"/>' % (x - 11, y - 8))
-        o.append('<text x="%d" y="%d" text-anchor="middle" font-size="10">%s</text>' % (x, y + 24, lbl))
-    o.append('<text x="400" y="118" text-anchor="middle" font-size="9.5">transport node</text>')
-    # two routes, two sealed packets, offset so they are never in step
-    r1 = 'M36 136 L150 78 Q258 24 330 78 L400 136 L484 136'
-    r2 = 'M36 136 L150 196 L290 204 L484 136'
-    o.append('<defs><path id="rns-r1" d="%s"/><path id="rns-r2" d="%s"/></defs>' % (r1, r2))
-    o.append('<g class="anim">')
-    for rid, dur, begin in (('rns-r1', 7.0, 0.0), ('rns-r2', 6.2, 3.1)):
-        for r, extra in ((8, ' fill="none" stroke="var(--reticulum)" stroke-width="1.6"'), (3.2, ' fill="var(--reticulum)"')):
-            o.append('<circle r="%s"%s><animateMotion dur="%.1fs" begin="%.1fs" repeatCount="indefinite"><mpath href="#%s" xlink:href="#%s"/></animateMotion></circle>' % (r, extra, dur, begin, rid, rid))
-    o.append('</g></svg>')
-    return ''.join(o)
-
-
 
 EXPLAIN = [
     ('meshcore', 'MeshCore', 'var(--meshcore)', 'Repeaters carry the message', diagram_meshcore,
@@ -567,12 +488,6 @@ EXPLAIN = [
       'A message ripples outward a few hops in every direction and stops. The more radios there '
       'are in an area, the further a message can travel.'],
      ['No dedicated infrastructure needed', 'A message floods a few hops, then stops', 'Reach depends on how many radios are about']),
-    ('reticulum', 'Reticulum', 'var(--reticulum)', 'Any link will do', diagram_reticulum,
-     ['Not tied to any one radio, or to radio at all: a way of moving <b>encrypted</b> messages over whatever is '
-      'available — LoRa, the internet, I2P, satellite, even MeshCore or Meshtastic — without caring which.',
-      'A message is sealed at your end and opened only at theirs. Everything in between, '
-      'including our transport node, carries it without being able to read it.'],
-     ['Encrypted end to end, by default', 'Runs over LoRa, the internet, I2P, satellite — even the other two meshes', 'No accounts, no central authority']),
 ]
 
 
@@ -606,7 +521,6 @@ BODY = '''
     <nav id="primary-nav" aria-label="Primary">
       <a href="https://meshcore.scotmesh.net/" data-net="meshcore">MeshCore</a>
       <a href="https://meshtastic.scotmesh.net/" data-net="meshtastic">Meshtastic</a>
-      <a href="https://rns.scotmesh.net/" data-net="reticulum">Reticulum</a>
       <a href="/news/">News</a>
       <a href="https://scotmesh.uk/" target="_blank" rel="noopener">Forum</a>
       <a class="ext icon" href="https://discord.gg/ytxfyuDmSt" target="_blank" rel="noopener" aria-label="ScotMesh on Discord" title="Discord"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.79.037c-.211.375-.445.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.32.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .31.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .078-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .79.009c.12.099.245.198.372.292a.077.077 0 0 1-.6.127c-.598.35-1.22.644-1.873.891a.077.077 0 0 0-.41.107c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .84.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .031-.056c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028ZM8.02 15.331c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z"/></svg><span class="icon-word">Discord</span></a>
@@ -619,11 +533,11 @@ BODY = '''
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <h1>Three meshes across Scotland, one community.</h1>
+      <h1>Two meshes across Scotland, one community.</h1>
       <p class="lede">
-        ScotMesh people run three separate radio networks. They do not talk to each
+        ScotMesh people run two separate radio networks. They do not talk to each
         other, and you do not have to pick just one — but you do have to start
-        somewhere. Here is what each is for, and what all three are doing right now.
+        somewhere. Here is what each is for, and what both are doing right now.
       </p>
       <div class="hero-links">
         <a class="btn btn-primary" href="https://discord.gg/ytxfyuDmSt" target="_blank" rel="noopener">Join the community</a>
@@ -635,7 +549,6 @@ BODY = '''
       <div class="legend">
         <span><i style="background:var(--meshcore)"></i>MeshCore</span>
         <span><i style="background:var(--meshtastic)"></i>Meshtastic</span>
-        <span><i style="background:var(--reticulum)"></i>Reticulum gateway</span>
       </div>
     </div>
   </div>
@@ -644,7 +557,7 @@ BODY = '''
       __NETS__
       <p class="live-note">
         Node positions on the map are real; the moving traffic is illustrative, shaped like each network's behaviour. Figures come from each network's own tools, refreshed every few minutes. They are not
-        the same measure — a MeshCore repeater, a Meshtastic node and a Reticulum client are
+        the same measure — a MeshCore repeater and a Meshtastic node are
         different things — so read them as signs of life, not a league table.
       </p>
     </div>
@@ -654,8 +567,7 @@ BODY = '''
 __TOOLS__
 <script>
   /* MeshCore and Meshtastic are equals here, so neither gets to be permanently
-     first: the pair is swapped at random on each load. Reticulum stays last —
-     it is the odd one out, being the only one you can join with no radio.
+     first: the pair is swapped at random on each load.
      This runs during parse, before first paint, so nothing visibly reorders. */
   (function () {
     if (!(Math.random() < 0.5)) return;
@@ -715,7 +627,6 @@ __TOOLS__
       <ul>
         <li><a href="https://meshcore.scotmesh.net/">MeshCore in Scotland</a></li>
         <li><a href="https://meshtastic.scotmesh.net/">Meshtastic in Scotland</a></li>
-        <li><a href="https://rns.scotmesh.net/">Reticulum in Scotland</a></li>
       </ul>
     </div>
     <div class="foot-bar">
