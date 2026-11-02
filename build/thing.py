@@ -51,15 +51,15 @@ MAIN = '''<main><section><div class="wrap"><div class="thing">
 
   <div class="thing-title">
     <h1>What's this thing?</h1>
-    <p class="lead">You've found a radio repeater. Don't worry, it's just us nerds, wanting to text each other without the internet.</p>
-    <p>It passes data from node to node across Scotland, which gives us texting, telemetry and weather information. Mostly, though, it's fun.</p>
+    <p class="lead">You've found a radio repeater. Don't worry, it's just us nerds, wanting tae text each other without the internet.</p>
+    <p>It passes data from node to node across Scotland, which gives us texting, telemetry and weather information (aye, it's usually raining). Mostly, though, it's a wee bit of fun.</p>
   </div>
 
-  <p class="did"><b>Did you know?</b> Some of our communications stretch from Inverness to the south of the island of Ireland.</p>
+  <p class="did"><b><svg width="20" height="13" viewBox="0 0 20 13" aria-hidden="true" style="vertical-align:-1px;margin-right:6px;border-radius:1px"><rect width="20" height="13" fill="#005EB8"/><path d="M0 0L20 13M20 0L0 13" stroke="#fff" stroke-width="2.4"/></svg>Did ye ken?</b> Some of our communications stretch from Inverness to the south of the island of Ireland.</p>
 
   <section>
-    <h2>When there's no signal</h2>
-    <p>It also works where there's no mobile signal, and it doesn't need mains power. Some of the community see it as a backup radio service for emergencies, such as a big storm or a long power cut.</p>
+    <h2>When there's nae signal</h2>
+    <p>It works fine where there's nae mobile signal, and it doesnae need mains power. Some of the community see it as a backup radio service for emergencies, such as a big storm or a long power cut.</p>
   </section>
 
   <section class="parts" aria-label="The parts of a repeater">
@@ -71,13 +71,13 @@ MAIN = '''<main><section><div class="wrap"><div class="thing">
     </figure>
     <ol class="key">
       <li><div><b>Antenna</b><span>Sends and receives the messages.</span></div></li>
-      <li><div><b>Radio</b><span>A small box that passes messages on.</span></div></li>
-      <li><div><b>Solar panel</b><span>Keeps it running, with no mains power.</span></div></li>
+      <li><div><b>Radio</b><span>A wee box that passes messages on.</span></div></li>
+      <li><div><b>Solar panel</b><span>Keeps it going with nae mains power, even on a dreich day.</span></div></li>
     </ol>
   </section>
 
   <section>
-    <h2>Is it safe?</h2>
+    <h2>Is it safe? Aye.</h2>
     <ul class="ticks">
       <li>It uses less radio power than a mobile phone.</li>
       <li>It has no camera and no microphone.</li>
@@ -102,7 +102,7 @@ MAIN = '''<main><section><div class="wrap"><div class="thing">
 
   <section>
     <h2>Get involved</h2>
-    <p>Anyone can join in. You can use the network with a cheap radio, or put up a repeater of your own.</p>
+    <p>Anyone can join in. A wee cheap radio will get you on the network, or you can put up a repeater of your own.</p>
     <div class="join">
       <a class="main" href="https://discord.gg/ytxfyuDmSt" target="_blank" rel="noopener">Join us on Discord</a>
       <a href="https://scotmesh.net/">About ScotMesh</a>
