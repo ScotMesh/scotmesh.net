@@ -482,9 +482,9 @@ EXPLAIN = [
       'Your radio just has to reach one repeater. From there the message hops repeater to '
       'repeater across the country, and each hop is recorded, so the route it took can be seen.'],
      ['Fixed repeaters on high ground do the carrying', 'Every hop is recorded in the packet', 'Reach depends on where the repeaters are']),
-    ('meshtastic', 'Meshtastic', 'var(--meshtastic)', 'Every radio repeats what it hears', diagram_meshtastic,
+    ('meshtastic', 'Meshtastic', 'var(--meshtastic)', 'Every radio can repeat what it hears', diagram_meshtastic,
      ['Long-range LoRa messaging with an app on your phone. There is no special infrastructure: '
-      '<b>every radio is also a relay</b>, and repeats what it hears to everyone in range.',
+      '<b>every radio can be a relay</b>, repeating what it hears to everyone in range.',
       'A message ripples outward a few hops in every direction and stops. The more radios there '
       'are in an area, the further a message can travel.'],
      ['No dedicated infrastructure needed', 'A message floods a few hops, then stops', 'Reach depends on how many radios are about']),
