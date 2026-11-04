@@ -268,10 +268,12 @@
   a:focus-visible, button:focus-visible { outline: 2px solid var(--chrome-ink); outline-offset: 2px; }
 
   @media (max-width: 880px) {
-    /* one column: headline, then the map, then the cards */
+    /* one column: the map, then the headline, then the cards */
     .hero-grid { grid-template-columns: 1fr; gap: 26px; padding-block: 34px 20px; }
     h1 { max-width: none; }
     .scotmap { max-height: 440px; }
+    /* the map leads on phones; the headline follows it */
+    .hero-map-layer { order: -1; }
     .nav .wrap { padding-block: 10px; row-gap: 4px; }
     .nets { grid-template-columns: 1fr; }
     .foot-grid { grid-template-columns: 1fr 1fr; }
