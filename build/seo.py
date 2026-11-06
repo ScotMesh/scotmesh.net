@@ -3,7 +3,7 @@ import re
 import json, datetime
 
 ORG_ID = 'https://scotmesh.net/#org'
-SAMEAS = ['https://scotmesh.uk/', 'https://wiki.scotmesh.uk/', 'https://discord.gg/ytxfyuDmSt',
+SAMEAS = ['https://scotmesh.uk/', 'https://wiki.scotmesh.net/', 'https://discord.gg/ytxfyuDmSt',
           'https://www.facebook.com/groups/26406719398968062', 'https://www.facebook.com/groups/414401424386367',
           'https://github.com/ScotMesh']
 ORG = {'@type': 'Organization', '@id': ORG_ID, 'name': 'ScotMesh', 'url': 'https://scotmesh.net/',
